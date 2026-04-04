@@ -38,7 +38,6 @@ The project follows a multi-container Docker architecture consisting of three ma
 ### Running the Application
 
 1. **Fork & Clone the repository**:
-
    - Fork the repository https://github.com/mddanish06/Movie-Streaming-App-DevOps.git
    - Once you have forked the repo on your github account, Clone the repo in your system
      ```bash
@@ -47,7 +46,6 @@ The project follows a multi-container Docker architecture consisting of three ma
      ```
 
 2. **Launch Server**
-
    - Launch an AWS EC2 Instance with `t2.medium` as Instance Type, and Give atleast 15GB of EBS Volume.
    - In `Security Group` you can allow all the trafic.
 
@@ -66,6 +64,7 @@ The project follows a multi-container Docker architecture consisting of three ma
   wget https://download.oracle.com/java/17/archive/jdk-17.0.10_linux-x64_bin.rpm
   yum install jdk-17.0.10_linux-x64_bin.rpm -y
   ```
+
   - Start the agent and join it to the Jenkins Master Node using the provided join command.
   - Install `git` in slave node, as it will be further used while cloning the repo
     ```bash
@@ -73,7 +72,6 @@ The project follows a multi-container Docker architecture consisting of three ma
     ```
 
 5.  **AWS S3 Bucket**
-
     - Media files are stored securely in an AWS S3 bucket, Hence we need to create an AWS S3 bucket which will be further used by our application, In my case i have created an s3 bucket with the name `moviebucketsudhanshuvlog` in the ap-south-1 region, If you wanted to change the bucket name, then you can update the variable called `Bucket` in the `app.js` file
     - Once you have created the bucket in AWS, You also need to enable the public access to the bucket,
       and you have to add an bucket policy(which will allow you to get the objects stored in bucket), In the below bucket policy just modify your `ARN Number`
@@ -95,17 +93,14 @@ The project follows a multi-container Docker architecture consisting of three ma
 
 6.  **Continuous Integration & Deployment**
 
-    CI/CD Pipeline: The CI/CD pipeline Checks code quality using SonarQube and then it builds Docker images with tags `jinny1/movie-streaming-backend-nodejs:latest` and `jinny1/movie-streaming-frontend:latest` and pushes them to DockerHub. Now it will deploy the application using these docker images
-
+    CI/CD Pipeline: The CI/CD pipeline Checks code quality using SonarQube and then it builds Docker images with tags `danish06/movie-streaming-backend-nodejs:latest` and `danish06/movie-streaming-frontend:latest` and pushes them to DockerHub. Now it will deploy the application using these docker images
     - Jenkins (for Continuous Integration)
       The project includes a CI-CD pipeline defined in `Jenkinsfile`, which performs the following steps:
-
       - Execute Test Cases
       - Docker Build & Push: Builds Docker images for the frontend and backend and pushes them to DockerHub.
       - As Pipeline is using some Secrets, Hence create the secrets from `Jenkins Credential Manager`
 
     - Jenkins (for Continuous Deployment)
-
       - Jenkins will Deploy the application on EKS cluster. `/deploy` directory has all the k8s yaml scripts.
 
 7.  **Latest Docker Image**
@@ -150,17 +145,14 @@ The following command creates a new EKS cluster named EKS-1 in the ap-south-1 re
 ### Code Explanation
 
 1. **Explanation of app.js file**
-
    - A Node.js backend server for managing a movie database with functionalities like file uploads to AWS S3, MySQL database interactions, and RESTful API endpoints.
 
    - Features
-
      - **File Uploads**: Handles image and video uploads using Multer and stores them in AWS S3.
      - **MySQL Database**: Stores movie metadata like title, genre, description, and more.
      - **REST API**: Provides endpoints for creating, fetching, and searching movies.
 
    - Technologies Used
-
      - **Express.js**: Web framework for Node.js.
      - **MySQL2**: MySQL client for database operations.
      - **Multer**: Middleware for handling file uploads.
@@ -169,7 +161,6 @@ The following command creates a new EKS cluster named EKS-1 in the ap-south-1 re
      - **CORS**: Enables cross-origin resource sharing.
 
    - Endpoints
-
      - `POST /movies` - Register a new movie with an image and video.
      - `GET /movies` - Fetch all movies.
      - `GET /movies/:id` - Fetch a specific movie by ID.
