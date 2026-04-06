@@ -64,7 +64,7 @@ pipeline {
           ).trim()
 
           sh """
-            sed 's|\\\${API_URL}|${apiUrl}|g' deploy/webapp-config.yaml | kubectl apply -f -
+            sed "s|${API_URL}|${API_URL:-35.154.125.246}|g" deploy/webapp-config.yaml | kubectl apply -f -
           """
         }
         sh "kubectl apply -f deploy/deployment-web.yaml"
