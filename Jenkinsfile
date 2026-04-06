@@ -62,10 +62,6 @@ pipeline {
             script: "kubectl get svc node-app-service -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'",
             returnStdout: true
           ).trim()
-
-          sh """
-            sed "s|${API_URL}|${API_URL:-35.154.125.246}|g" deploy/webapp-config.yaml | kubectl apply -f -
-          """
         }
         sh "kubectl apply -f deploy/deployment-web.yaml"
         sh "kubectl apply -f deploy/service-web.yaml"
