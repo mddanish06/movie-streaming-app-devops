@@ -21,7 +21,7 @@ const db = mysql.createConnection({
   host: process.env.DB_HOST || "mysql-db",
   user: process.env.DB_USER || "admin",
   password: process.env.DB_PASSWORD || "redhat",
-  database: process.env.DB_NAME || "movie_db",
+  database: process.env.DB_NAME || "moviedb",
 });
 const cors = require("cors");
 app.use(cors());
