@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'dev', url: 'https://github.com/mddanish06/movie-streaming-app-devops.git'
+        git branch: 'main', url: 'https://github.com/mddanish06/movie-streaming-app-devops.git'
       }
     }
     stage('Unit Tests') {
